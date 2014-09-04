@@ -35,6 +35,7 @@ $(function () {
   //
 
   var $code = $('#code');
+  var mountNode = document.getElementById('preview');
   var $json = $('#json');
   var $example = $('#example');
   var JSX_PREAMBLE = '/** @jsx React.DOM */\n';
@@ -49,16 +50,19 @@ $(function () {
 
   function run() {
     var code = $code.val();
-    var x;
+    var component;
+    var json;
     if (code.indexOf('this.transferPropsTo') !== -1) {
-      x = new Error('`this.transferPropsTo` not supported, please try to remove the `transferPropsTo` call');
+      component = new Error('`this.transferPropsTo` not supported, please try to remove the `transferPropsTo` call');
     } else {
-      x = evalCode(code);
+      component = evalCode(code);
+      json = vdom(component);
     }
-    if (x instanceof Error) {
-      $json.html('<div class="alert alert-danger">' + x.message + '</div>');
+    if (component instanceof Error) {
+      $json.html('<div class="alert alert-danger">' + component.message + '</div>');
     } else {
-      $json.html('<pre>' + JSON.stringify(x, null, 2) + '</pre>');
+      $json.html('<pre>' + JSON.stringify(json, null, 2) + '</pre>');
+      React.renderComponent(component, mountNode);
     }
   }
 

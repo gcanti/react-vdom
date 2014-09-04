@@ -38,6 +38,8 @@
           <button class="btn btn-primary" id="run">Run</button>
         </div>
         <div class="col-md-6">
+          <p class="lead">Preview</p>
+          <div id="preview"></div>
           <p class="lead">VDOM</p>
           <div id="json"></div>
         </div>
@@ -52,7 +54,7 @@
 });
 
 // important: call your component like this
-vdom(<Anchor href="#section">content</Anchor>);
+<Anchor href="#section">content</Anchor>
 </script>
 <script type="text/example" id="nested">var List = React.createClass({
   render: function () {
@@ -70,13 +72,11 @@ var Item = React.createClass({
   }
 });
 
-vdom(
-  <List>
-    <Item>item 1</Item>
-    <Item><b>item 2</b></Item>
-    <Item><i>item 3</i></Item>
-  </List>
-);
+<List>
+  <Item>item 1</Item>
+  <Item><b>item 2</b></Item>
+  <Item><i>item 3</i></Item>
+</List>
 </script>
 <script type="text/example" id="todo">var TodoItem = React.createClass({
     getInitialState: function () {
@@ -120,7 +120,7 @@ var todo = {
   completed: false
 };
 
-vdom(<TodoItem todo={todo}/>);
+<TodoItem todo={todo}/>
 </script>
     <a href="https://github.com/gcanti/react-vdom"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
   </body>

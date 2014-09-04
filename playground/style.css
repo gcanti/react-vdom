@@ -23,3 +23,9 @@ textarea.form-control {
   font-size: 12px;
   height: 200px;
 }
+
+#preview {
+  padding: 20px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
