@@ -49,9 +49,13 @@ $(function () {
 
   function run() {
     var code = $code.val();
-    var x = evalCode(code);
+    var x;
+    if (code.indexOf('this.transferPropsTo') !== -1) {
+      x = new Error('`this.transferPropsTo` not supported, please try to remove the `transferPropsTo` call');
+    } else {
+      x = evalCode(code);
+    }
     if (x instanceof Error) {
-      //throw x;
       $json.html('<div class="alert alert-danger">' + x.message + '</div>');
     } else {
       $json.html('<pre>' + JSON.stringify(x, null, 2) + '</pre>');
