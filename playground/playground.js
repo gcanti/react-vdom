@@ -13,6 +13,9 @@ $(function () {
     },
     spinner: {
       label: 'Spinner'
+    },
+    svg: {
+      label: 'SVG'
     }
   };
 
@@ -55,8 +58,11 @@ $(function () {
     if (code.indexOf('this.transferPropsTo') !== -1) {
       component = new Error('`this.transferPropsTo` not supported, please try to remove the `transferPropsTo` call');
     } else {
-      component = evalCode(code);
-      json = vdom(component);
+      try {
+        component = evalCode(code);
+        json = vdom(component);
+      } catch (e) {
+      }
     }
     if (component instanceof Error) {
       $json.html('<div class="alert alert-danger">' + component.message + '</div>');
