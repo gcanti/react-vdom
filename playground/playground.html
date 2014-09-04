@@ -10,9 +10,9 @@
     <script src="https:////cdnjs.cloudflare.com/ajax/libs/react/0.11.1/react-with-addons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.11.1/JSXTransformer.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css"/>
-    <script src="react-vdom.js"></script>
-    <script src="playground.js"></script>
+    <script type="text/javascript" src="react-vdom.js"></script>
     <link type="text/css" rel="stylesheet" href="https://raw.githubusercontent.com/chenglou/react-spinner/master/react-spinner.css"/>
+    <script type="text/javascript" src="playground.js"></script>
   </head>
   <body>
     <div class="container">
@@ -20,6 +20,7 @@
         <div class="col-md-6">
           <h1><a href="https://github.com/gcanti/react-vdom">react-vdom</a> Playground</h1>
           <p class="text-muted">A library for retrieving the VDOM of a React component</p>
+          <p><b>Test your components with <code>assert.deepEqual</code></b></p>
         </div>
         <div class="col-md-6">
           <div class="text-right repo-link"><p><span>My </span><a href="/">blog</a></p></div>
@@ -54,7 +55,7 @@
 });
 
 // important: call your component like this
-<Anchor href="#section">content</Anchor>
+<Anchor href="#section">a link</Anchor>
 </script>
 <script type="text/example" id="nested">var List = React.createClass({
   render: function () {
@@ -113,49 +114,7 @@ var Spinner = React.createClass({
 
 <Spinner />
 </script>
-<script type="text/example" id="todo">var TodoItem = React.createClass({
-    getInitialState: function () {
-      return {editText: this.props.todo.title};
-    },
-    render: function () {
-      return (
-        <li className={React.addons.classSet({
-          completed: this.props.todo.completed,
-          editing: this.props.editing
-        })}>
-          <div className="view">
-            <input
-              className="toggle"
-              type="checkbox"
-              checked={this.props.todo.completed}
-              onChange={this.props.onToggle}
-            />
-            <label onDoubleClick={this.handleEdit}>
-              {this.props.todo.title}
-            </label>
-            <button className="destroy" onClick={this.props.onDestroy} />
-          </div>
-          <input
-            ref="editField"
-            className="edit"
-            value={this.state.editText}
-            onBlur={this.handleSubmit}
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-          />
-        </li>
-      );
-    }
-  });
-
-// data
-var todo = {
-  id: '551d87f0-340f-11e4-8c21-0800200c9a66',
-  title: 'My title',
-  completed: false
-};
-
-<TodoItem todo={todo}/>
+<script type="text/example" id="example">
 </script>
     <a href="https://github.com/gcanti/react-vdom"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
   </body>

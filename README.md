@@ -1,10 +1,5 @@
 % react-vdom
 
-# Feedback
-
-This library is under development. It may have problems with `transferPropsTo` but since it's a deprecated method 
-it should not be a problem. If you have any feedback, please open an Issue.
-
 # Playground
 
 Try the [playground online](https://gcanti.github.io/resources/react-vdom/playground/playground.html)
@@ -23,8 +18,8 @@ var Anchor = React.createClass({
   }
 });
 
-var c = Anchor({href: '#section'}, 'title');
-var json = vdom(c);
+var component = Anchor({href: '#section'}, 'title');
+var json = vdom(component);
 console.log(json);
 ```
 
