@@ -1,10 +1,8 @@
 % react-vdom
 
-Retrieves the VDOM from a component.
-
 # Feedback
 
-This function is under development. It may have problems with `transferPropsTo` but since it's a deprecated method 
+This library is under development. It may have problems with `transferPropsTo` but since it's a deprecated method 
 it should not be a problem. If you have any feedback, please open an Issue.
 
 # Playground
@@ -30,7 +28,7 @@ var json = vdom(c);
 console.log(json);
 ```
 
-returns 
+outputs 
 
 ```json
 {
@@ -44,7 +42,7 @@ returns
 
 # Setup
 
-  npm install react-vdom
+    npm install react-vdom
 
 # Api
 
@@ -54,6 +52,6 @@ vdom(component)
 
 - `component` an instance of a component
 
-Returns a JSON containing the VDOM.
+Returns a JSON containing a synthetic VDOM.
 
 # License (MIT)
