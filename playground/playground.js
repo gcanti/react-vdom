@@ -11,6 +11,9 @@ $(function () {
     nested: {
       label: 'Nested components'
     },
+    spinner: {
+      label: 'Spinner'
+    },
     todo: {
       label: '`TodoItem` component of React TodoMVC'
     }

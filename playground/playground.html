@@ -12,7 +12,7 @@
     <link type="text/css" rel="stylesheet" href="style.css"/>
     <script src="react-vdom.js"></script>
     <script src="playground.js"></script>
-
+    <link type="text/css" rel="stylesheet" href="https://raw.githubusercontent.com/chenglou/react-spinner/master/react-spinner.css"/>
   </head>
   <body>
     <div class="container">
@@ -77,6 +77,41 @@ var Item = React.createClass({
   <Item><b>item 2</b></Item>
   <Item><i>item 3</i></Item>
 </List>
+</script>
+<script type="text/example" id="spinner">// code from https://github.com/chenglou/react-spinner
+var Spinner = React.createClass({
+  render: function() {
+    var bars = [];
+    var barStyle;
+
+    for (var i = 0; i < 12; i++) {
+      barStyle = {};
+      barStyle.WebkitAnimationDelay = barStyle.animationDelay =
+        (i - 12) / 10 + 's';
+
+      barStyle.WebkitTransform = barStyle.transform =
+        'rotate(' + (i * 30) + 'deg) translate(146%)';
+
+      bars.push(
+        <div style={barStyle} className="react-spinner_bar" key={i} />
+      );
+    }
+
+    var style = {
+      height: 50,
+      width: 50,
+      backgroundColor: 'black'
+    };
+
+    return (
+      <div style={style}>
+        <div className="react-spinner">{bars}</div>
+      </div>
+    );
+  }
+});
+
+<Spinner />
 </script>
 <script type="text/example" id="todo">var TodoItem = React.createClass({
     getInitialState: function () {
