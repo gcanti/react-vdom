@@ -1,0 +1,128 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>tcomb-validation playground</title>
+    
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https:////cdnjs.cloudflare.com/ajax/libs/react/0.11.1/react-with-addons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.11.1/JSXTransformer.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <script src="react-vdom.js"></script>
+    <script src="playground.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row header">
+        <div class="col-md-6">
+          <h1><a href="https://github.com/gcanti/react-vdom">react-vdom</a> Playground</h1>
+          <p class="text-muted">A library to retrieve the VDOM of a React component</p>
+        </div>
+        <div class="col-md-6">
+          <div class="text-right repo-link"><p><span>My </span><a href="/">blog</a></p></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="lead">Choose an example or paste the code of your component</p>
+          <div id="examples" class="form-group"></div>
+          <div>
+            <pre class="jsx-preamble">/** @jsx React.DOM */</pre>
+            <div class="form-group">
+              <textarea id="code" class="form-control" type="textarea"></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="run">Run</button>
+        </div>
+        <div class="col-md-6">
+          <p class="lead">VDOM</p>
+          <div id="json"></div>
+        </div>
+      </div>
+    </div>
+<script type="text/example" id="anchor">var Anchor = React.createClass({
+  render: function () {
+    return (
+      <a href={this.props.href}>{this.props.children}</a>
+    );
+  }
+});
+
+// important: call your component like this
+vdom(<Anchor href="#section">content</Anchor>);
+</script>
+<script type="text/example" id="nested">var List = React.createClass({
+  render: function () {
+    return (
+      <ul>{this.props.children}</ul>
+    );
+  }
+});
+
+var Item = React.createClass({
+  render: function () {
+    return (
+      <li>{this.props.children}</li>
+    );
+  }
+});
+
+vdom(
+  <List>
+    <Item>item 1</Item>
+    <Item><b>item 2</b></Item>
+    <Item><i>item 3</i></Item>
+  </List>
+);
+</script>
+<script type="text/example" id="todo">var TodoItem = React.createClass({
+    getInitialState: function () {
+      return {editText: this.props.todo.title};
+    },
+    render: function () {
+      return (
+        <li className={React.addons.classSet({
+          completed: this.props.todo.completed,
+          editing: this.props.editing
+        })}>
+          <div className="view">
+            <input
+              className="toggle"
+              type="checkbox"
+              checked={this.props.todo.completed}
+              onChange={this.props.onToggle}
+            />
+            <label onDoubleClick={this.handleEdit}>
+              {this.props.todo.title}
+            </label>
+            <button className="destroy" onClick={this.props.onDestroy} />
+          </div>
+          <input
+            ref="editField"
+            className="edit"
+            value={this.state.editText}
+            onBlur={this.handleSubmit}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+          />
+        </li>
+      );
+    }
+  });
+
+// data
+var todo = {
+  id: '551d87f0-340f-11e4-8c21-0800200c9a66',
+  title: 'My title',
+  completed: false
+};
+
+vdom(<TodoItem todo={todo}/>);
+</script>
+    <a href="https://github.com/gcanti/react-vdom"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+  </body>
+</html>
+
