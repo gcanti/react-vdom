@@ -1,0 +1,26 @@
+{
+  "name": "react-vdom",
+  "version": "0.0.1",
+  "description": "Retrieves the VDOM from a component",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gcanti/react-vdom.git"
+  },
+  "author": "Giulio Canti <giulio.canti@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gcanti/react-vdom/issues"
+  },
+  "homepage": "https://github.com/gcanti/react-vdom",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "tags": [
+    "react",
+    "vdom",
+    "test"
+  ]
+}
