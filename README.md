@@ -7,6 +7,10 @@ Retrieves the VDOM from a component.
 This function is under development. It may have problems with `transferPropsTo` but since it's a deprecated method 
 it should not be a problem. If you have any feedback, please open an Issue.
 
+# Playground
+
+Try the [playground online](https://gcanti.github.io/resources/react-vdom/playground/playground.html)
+
 # Example
 
 ```js
