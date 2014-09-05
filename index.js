@@ -1,40 +1,25 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define([], factory);
+    define(['tcomb'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory();
+    module.exports = factory(require('tcomb'));
   } else {
-    root.vdom = factory();
+    root.vdom = factory(root.t);
   }
-}(this, function () {
+}(this, function (t) {
 
   'use strict';
-
-  var isArray = Array.isArray || function (x) {
-    return x instanceof Array;
-  };
-
-  var isObject = function (x) {
-    return typeof x === 'object' && x !== null;
-  };
-
-  function mixin(target, source, overwrite) {
-    for (var k in source) {
-      target[k] = source[k];
-    }
-    return target;
-  }
 
   function getTag(c) {
     return c.constructor.type.displayName;
   }
 
   function recurse(x) {
-    if (isArray(x)) {
+    if (t.Arr.is(x)) {
       return x.map(recurse);
     }
-    if (isObject(x)) {
+    if (t.Obj.is(x)) {
       var tag = getTag(x);
       if (!tags.hasOwnProperty(tag)) {
         return vdom(x);
@@ -58,16 +43,16 @@
     return x;
   }
 
-  function vdom(c) {
-    var instance = new c.type(c);
-    mount.call(instance);
+  function vdom(c, state) {
+    var instance = instantiateReactComponent(c);
+    mount.call(instance, state);
     return recurse(instance.render());
   }
 
   // this is an extract of the React code base
   // file: ReactCompositeComponent.js
   // lines: 749-783
-  function mount() {
+  function mount(state) {
     this._compositeLifeCycleState = 'MOUNTING'; //CompositeLifeCycle.MOUNTING;
 
     if (this.__reactAutoBindMap) {
@@ -77,7 +62,8 @@
     this.context = this._processContext(this._descriptor._context);
     this.props = this._processProps(this.props);
 
-    this.state = this.getInitialState ? this.getInitialState() : null;
+    // custom code to inject state
+    this.state = state ? state : this.getInitialState ? this.getInitialState() : null;
     //("production" !== process.env.NODE_ENV ? invariant(
     //  typeof this.state === 'object' && !Array.isArray(this.state),
     //  '%s.getInitialState(): must return an object or null',

@@ -11,21 +11,39 @@ var vdom = require('../index');
 
 var eq = assert.deepEqual;
 
-var Anchor = React.createClass({displayName: 'Anchor',
-  render: function () {
-    return (
-      React.DOM.a({href: this.props.href}, this.props.children)
-    );
-  }
-});
-
 describe('vdom', function () {
-  var component = Anchor({href: '#section'}, 'title');
+
   it('should return a assertable DOM', function () {
+    var Anchor = React.createClass({displayName: 'Anchor',
+      render: function () {
+        return (
+          React.DOM.a({href: this.props.href}, this.props.children)
+        );
+      }
+    });
+    var component = Anchor({href: '#section'}, 'title');
     eq({
       tag: 'a',
       attrs: {href: '#section'},
       children: 'title'
     }, vdom(component));
   });
+
+  it('should handle state argument', function () {
+    var Anchor = React.createClass({displayName: 'Anchor',
+      render: function () {
+        return (
+          React.DOM.a({href: this.state.href}, this.props.children)
+        );
+      }
+    });
+    var component = Anchor(null, 'title');
+    var state = {href: '#section'};
+    eq({
+      tag: 'a',
+      attrs: {href: '#section'},
+      children: 'title'
+    }, vdom(component, state));
+  });
+
 });

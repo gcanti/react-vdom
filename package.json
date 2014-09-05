@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/gcanti/react-vdom",
   "dependencies": {
+    "tcomb": "~0.2.0"
   },
   "devDependencies": {
     "react": "*"
