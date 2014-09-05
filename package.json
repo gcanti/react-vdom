@@ -15,10 +15,10 @@
   },
   "homepage": "https://github.com/gcanti/react-vdom",
   "dependencies": {
-    "tcomb": "~0.2.0"
+    "tcomb": "~0.2.0",
+    "react": "*"
   },
   "devDependencies": {
-    "react": "*"
   },
   "tags": [
     "react",

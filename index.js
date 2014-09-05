@@ -1,7 +1,8 @@
 'use strict';
 
 var t = require('tcomb');
-var tags = require('./tags');
+var React = require('react');
+var ReactDescriptor = require("react/lib/ReactDescriptor");
 
 function getTag(c) {
   return c.constructor.type.displayName;
@@ -13,7 +14,7 @@ function recurse(x) {
   }
   if (t.Obj.is(x)) {
     var tag = getTag(x);
-    if (!tags.hasOwnProperty(tag)) {
+    if (!React.DOM.hasOwnProperty(tag)) {
       return vdom(x);
     }
     var ret = {
@@ -35,10 +36,14 @@ function recurse(x) {
   return x;
 }
 
-function vdom(c, state) {
-  var instance = instantiateReactComponent(c);
-  mount.call(instance, state);
-  return recurse(instance.render());
+function vdom(x, state) {
+  if (x instanceof ReactDescriptor) {
+    x = instantiateReactComponent(x);
+  }
+  if (!x.isMounted()) {
+    mount.call(x, state);
+  }
+  return recurse(x.render());
 }
 
 // file: instantiateReactComponent.js
@@ -47,7 +52,7 @@ function instantiateReactComponent(descriptor) {
   return new descriptor.type(descriptor);
 }
 
-// this is an extract of the React code base
+// this is a modified extract of the React code base
 // file: ReactCompositeComponent.js
 // lines: 749-783
 function mount(state) {
@@ -85,12 +90,16 @@ function mount(state) {
     this.state = state;
   }
 
-  //this._renderedComponent = instantiateReactComponent(
-  //  this._renderValidatedComponent()
-  //);
+  this._renderedComponent = instantiateReactComponent(
+    this._renderValidatedComponent()
+  );
+  // custom
+  this._renderedComponent._lifeCycleState = "MOUNTED";
 
   // Done with mounting, `setState` will now trigger UI changes.
   this._compositeLifeCycleState = null;
+  // custom
+  this._lifeCycleState = 'MOUNTED';
 }
 
 module.exports = vdom;
