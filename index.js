@@ -9,7 +9,7 @@ function getTag(c) {
 
 function recurse(x) {
   if (t.Arr.is(x)) {
-    return x.map(recurse);
+    return x.map(vdom);
   }
   if (t.Obj.is(x)) {
     var tag = getTag(x);
@@ -41,6 +41,12 @@ function vdom(c, state) {
   return recurse(instance.render());
 }
 
+// file: instantiateReactComponent.js
+// lines: 59-59
+function instantiateReactComponent(descriptor) {
+  return new descriptor.type(descriptor);
+}
+
 // this is an extract of the React code base
 // file: ReactCompositeComponent.js
 // lines: 749-783
@@ -54,8 +60,7 @@ function mount(state) {
   this.context = this._processContext(this._descriptor._context);
   this.props = this._processProps(this.props);
 
-  // custom code to inject state
-  this.state = state ? state : this.getInitialState ? this.getInitialState() : null;
+  this.state = this.getInitialState ? this.getInitialState() : null;
   //("production" !== process.env.NODE_ENV ? invariant(
   //  typeof this.state === 'object' && !Array.isArray(this.state),
   //  '%s.getInitialState(): must return an object or null',
@@ -75,18 +80,17 @@ function mount(state) {
     }
   }
 
-  this._renderedComponent = instantiateReactComponent(
-    this._renderValidatedComponent()
-  );
+  // custom code to inject state
+  if (state) {
+    this.state = state;
+  }
+
+  //this._renderedComponent = instantiateReactComponent(
+  //  this._renderValidatedComponent()
+  //);
 
   // Done with mounting, `setState` will now trigger UI changes.
   this._compositeLifeCycleState = null;
-}
-
-// file: instantiateReactComponent.js
-// lines: 59-59
-function instantiateReactComponent(descriptor) {
-  return new descriptor.type(descriptor);
 }
 
 module.exports = vdom;
