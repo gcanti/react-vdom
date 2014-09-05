@@ -68,10 +68,10 @@ outputs
 # Api
 
 ```js
-vdom(descriptor, state)
+vdom(descriptor, [state])
 ```
 
-- `descriptor` a ReactDescriptor or a ReactCompositeComponentBase
+- `descriptor` a ReactDescriptor
 - `state` inject a state
 
 Returns a JSON containing a synthetic VDOM.
