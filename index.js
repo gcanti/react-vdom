@@ -36,14 +36,10 @@ function recurse(x) {
   return x;
 }
 
-function vdom(x, state) {
-  if (x instanceof ReactDescriptor) {
-    x = instantiateReactComponent(x);
-  }
-  if (!x.isMounted()) {
-    mount.call(x, state);
-  }
-  return recurse(x.render());
+function vdom(descriptor, state) {
+  descriptor = instantiateReactComponent(descriptor);
+  mount.call(descriptor, state);
+  return recurse(descriptor.render());
 }
 
 // file: instantiateReactComponent.js

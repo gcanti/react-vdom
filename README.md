@@ -4,21 +4,31 @@
 
 Try the [playground online](https://gcanti.github.io/resources/react-vdom/playground/playground.html)
 
-# Example
+# Contents
+
+- [Basic example](#basic-example)
+- [Inject a state](#inject-a-state)
+- [Setup](#setup)
+- [Api](#api)
+
+# Basic example
 
 ```js
-var vdom = require('react-vdom');
+var vdom = require('react-vdom').vdom;
 
 // a simple component
-var Descriptor = React.createClass({
+var Counter = React.createClass({
+  getInitialState: function () {
+    return {count: 0};
+  },
   render: function () {
     return (
-      <a href={this.props.href}>{this.props.children}</a>
+      React.DOM.div(null, this.state.count)
     );
   }
 });
 
-var component = Descriptor({href: '#section'}, 'title');
+var component = Counter();
 var json = vdom(component);
 console.log(json);
 ```
@@ -27,40 +37,27 @@ outputs
 
 ```json
 {
-  "tag": "a",
-  "attrs": {
-    "href": "#section"
-  },
-  "children": "title"
+  "tag": "div",
+  "attrs": {},
+  "children": 0
 }
 ```
 
-You can also inject a state
+# Inject a state
 
 ```js
-var Descriptor = React.createClass({
-  render: function () {
-    return (
-      <a href={this.state.href}>{this.props.children}</a>
-    );
-  }
-});
-
-var state = {href: '#section'};
-var component = Descriptor(null, 'title');
-var json = vdom(component, state);
-console.log(json);
+var state = {count: 1};
+var component = Counter();
+console.log(vdom(component, state));
 ```
 
 outputs 
 
 ```json
 {
-  "tag": "a",
-  "attrs": {
-    "href": "#section"
-  },
-  "children": "title"
+  "tag": "div",
+  "attrs": {},
+  "children": 1
 }
 ```
 
