@@ -8,9 +8,15 @@ function getTag(c) {
   return c.constructor.type.displayName;
 }
 
+function compact(arr) {
+  return arr.filter(function (x) {
+    return !t.Nil.is(x);
+  });
+}
+
 function recurse(x) {
   if (t.Arr.is(x)) {
-    return x.map(vdom);
+    return compact(x).map(vdom);
   }
   if (t.Obj.is(x)) {
     var tag = getTag(x);
@@ -37,6 +43,9 @@ function recurse(x) {
 }
 
 function vdom(descriptor, state) {
+  if (t.Nil.is(descriptor) || t.Nil.is(descriptor.type)) {
+    return recurse(descriptor);
+  }
   descriptor = instantiateReactComponent(descriptor);
   mount.call(descriptor, state);
   return recurse(descriptor.render());
