@@ -16,7 +16,9 @@ function compact(arr) {
 
 function recurse(x) {
   if (t.Arr.is(x)) {
-    return compact(x).map(vdom);
+    return compact(x).map(function (x) {
+      return vdom(x);
+    });
   }
   if (t.Obj.is(x)) {
     var tag = getTag(x);
@@ -31,7 +33,7 @@ function recurse(x) {
     for (var k in x.props) {
       if (x.props.hasOwnProperty(k)) {
         if (k === 'children') {
-          ret.children = recurse(x.props[k]);
+          ret.children = vdom(x.props[k]);
         } else {
           ret.attrs[k] = x.props[k];
         }
