@@ -1,6 +1,6 @@
 {
   "name": "react-vdom",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Retrieves the VDOM from a component",
   "main": "index.js",
   "scripts": {},
