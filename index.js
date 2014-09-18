@@ -4,6 +4,8 @@ var t = require('tcomb');
 var React = require('react');
 var ReactDescriptor = require("react/lib/ReactDescriptor");
 
+var Nil = t.Nil;
+
 function getTag(c) {
   return c.constructor.type.displayName;
 }
@@ -16,9 +18,7 @@ function compact(arr) {
 
 function recurse(x) {
   if (t.Arr.is(x)) {
-    return compact(x).map(function (x) {
-      return vdom(x);
-    });
+    return compact(x).map(recurse);
   }
   if (t.Obj.is(x)) {
     var tag = getTag(x);
@@ -33,7 +33,7 @@ function recurse(x) {
     for (var k in x.props) {
       if (x.props.hasOwnProperty(k)) {
         if (k === 'children') {
-          ret.children = vdom(x.props[k]);
+          ret.children = recurse(x.props[k]);
         } else {
           ret.attrs[k] = x.props[k];
         }
@@ -45,7 +45,7 @@ function recurse(x) {
 }
 
 function vdom(descriptor, state) {
-  if (t.Nil.is(descriptor) || t.Nil.is(descriptor.type)) {
+  if (Nil.is(descriptor) || Nil.is(descriptor.type)) {
     return recurse(descriptor);
   }
   descriptor = instantiateReactComponent(descriptor);
@@ -69,6 +69,7 @@ function mount(state) {
     this._bindAutoBindMethods();
   }
 
+  //if (!this._processContext) console.log(this);
   this.context = this._processContext(this._descriptor._context);
   this.props = this._processProps(this.props);
 
