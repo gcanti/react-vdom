@@ -2,11 +2,22 @@
 
 var t = require('tcomb');
 
+function compact(arr) {
+  return arr.filter(function (x) {
+    return !t.Nil.is(x);
+  });
+}
+
+function flatten(arr) {
+  return [].concat.apply([], arr);
+}
+
 function vdom(x, state) {
   if (t.Arr.is(x)) {
-    return x.map(function (y) {
+    x = compact(flatten(x)).map(function (y) {
       return vdom(y);
     });
+    return x.length > 1 ? x : x[0];
   } else if (t.Obj.is(x)) {
     var type = x.type;
     if (t.Str.is(type)) {
