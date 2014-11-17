@@ -1,3 +1,21 @@
+# The Idea
+
+I wrote this handy little library for testing purposes: you can extract the vdom from a React
+component and test it against a JSON with simple tools like assert.deepEqual() and without a real DOM.
+The extracted vdom has the following type definition:
+
+    type Node = {
+      tag: string,
+      attrs: object<name, value>,
+      children: undefined | null | Node | Array<Node>
+    }
+
+If your component handle a private state, you can inject a state to test different configurations.
+
+This is an example of massive use in a form generation library:
+
+https://github.com/gcanti/tcomb-form/blob/master/test/test.js
+
 # Basic example
 
 ```js

@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/gcanti/react-vdom",
   "dependencies": {
-    "tcomb": "^0.3.3",
-    "react": "^0.12.0"
+    "tcomb": "^0.3.3"
   },
   "devDependencies": {
-    "reactify": "^0.16.0"
+    "reactify": "^0.16.0",
+    "react": "^0.12.0"
   },
   "tags": [
     "react",
