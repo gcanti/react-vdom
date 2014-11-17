@@ -1,16 +1,3 @@
-% react-vdom
-
-# Playground
-
-Try the [playground online](https://gcanti.github.io/resources/react-vdom/playground/playground.html)
-
-# Contents
-
-- [Basic example](#basic-example)
-- [Inject a state](#inject-a-state)
-- [Setup](#setup)
-- [Api](#api)
-
 # Basic example
 
 ```js
