@@ -33,7 +33,7 @@ var json = vdom(component);
 console.log(json);
 ```
 
-outputs 
+outputs
 
 ```json
 {
@@ -51,7 +51,7 @@ var component = Counter();
 console.log(vdom(component, state));
 ```
 
-outputs 
+outputs
 
 ```json
 {
@@ -68,10 +68,10 @@ outputs
 # Api
 
 ```js
-vdom(descriptor, [state])
+vdom(element, [state])
 ```
 
-- `descriptor` a ReactDescriptor
+- `element` a ReactElement
 - `state` inject a state
 
 Returns a JSON containing a synthetic VDOM.
