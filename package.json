@@ -1,6 +1,6 @@
 {
   "name": "react-vdom",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Retrieves the VDOM from a component",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/gcanti/react-vdom",
   "dependencies": {
-    "tcomb": "^0.3.3"
+    "tcomb": "^0.4.0"
   },
   "devDependencies": {
     "reactify": "^0.16.0",
@@ -27,6 +27,13 @@
   "tags": [
     "react",
     "vdom",
-    "test"
+    "test",
+    "react-component"
+  ],
+  "keywords": [
+    "react",
+    "vdom",
+    "test",
+    "react-component"
   ]
 }
