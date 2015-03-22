@@ -1,6 +1,6 @@
 {
   "name": "react-vdom",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Retrieves the VDOM from a component",
   "main": "index.js",
   "scripts": {
@@ -17,12 +17,12 @@
     "url": "https://github.com/gcanti/react-vdom/issues"
   },
   "homepage": "https://github.com/gcanti/react-vdom",
-  "dependencies": {
-    "tcomb": "^0.4.0"
+  "peerDependencies": {
+    "tcomb": "^1.0.0"
   },
   "devDependencies": {
     "reactify": "^0.16.0",
-    "react": "^0.12.0"
+    "react": ">=0.12.0"
   },
   "tags": [
     "react",

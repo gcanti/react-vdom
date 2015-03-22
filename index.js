@@ -44,7 +44,7 @@ function vdom(x, state) {
       // props
       var props = y.getDefaultProps ? y.getDefaultProps() : {};
       if (x.props) {
-        props = t.util.mixin(props, x.props, true);
+        props = t.mixin(props, x.props, true);
       }
       y.props = props;
       // state
