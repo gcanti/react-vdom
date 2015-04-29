@@ -19,7 +19,7 @@ https://github.com/gcanti/tcomb-form/blob/master/test/test.js
 # Basic example
 
 ```js
-var vdom = require('react-vdom').vdom;
+var vdom = require('react-vdom');
 
 // a simple component
 var Counter = React.createClass({
