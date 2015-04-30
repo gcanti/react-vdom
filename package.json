@@ -1,11 +1,10 @@
 {
   "name": "react-vdom",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Retrieves the VDOM from a component",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "dev": "watchify -t reactify dev/dev.jsx -o dev/dev.js -v"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -18,11 +17,12 @@
   },
   "homepage": "https://github.com/gcanti/react-vdom",
   "peerDependencies": {
-    "tcomb": "^1.0.0"
+    "react": "^0.13.0"
   },
   "devDependencies": {
-    "reactify": "^0.16.0",
-    "react": ">=0.12.0"
+    "reactify": "^1.1.0",
+    "tcomb-form": "^0.4.11",
+    "tcomb-validation": "^1.0.3"
   },
   "tags": [
     "react",

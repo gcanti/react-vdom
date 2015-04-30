@@ -2,88 +2,211 @@
 
 var assert = require('assert');
 var React = require('react');
-var vdom = require('../index');
-
-//
-// setup
-//
+var vdom = require('../.');
+var t = require('tcomb-form');
+var util = require('util');
 
 var eq = assert.deepEqual;
 
 describe('vdom', function () {
 
-  describe('createClass', function () {
+  describe('DOM', function () {
 
-    it('should return a assertable DOM', function () {
-      var Anchor = React.createFactory(React.createClass({displayName: 'Anchor',
-        render: function () {
-          return (
-            React.DOM.a({href: this.props.href}, this.props.children)
-          );
-        }
-      }));
-      var component = Anchor({href: '#section'}, 'title');
+    it('should handle a simple tag', function () {
+      var component = React.DOM.div();
       eq({
-        tag: 'a',
-        attrs: {href: '#section'},
-        children: 'title'
+        tag: 'div'
       }, vdom(component));
     });
 
-    it('should handle state argument', function () {
-      var Anchor = React.createFactory(React.createClass({displayName: 'Anchor',
-        render: function () {
-          return (
-            React.DOM.a({href: this.state.href}, this.props.children)
-          );
-        }
-      }));
-      var component = Anchor(null, 'title');
-      var state = {href: '#section'};
+    it('should handle props', function () {
+      var component = React.DOM.div({a: 1});
       eq({
-        tag: 'a',
-        attrs: {href: '#section'},
-        children: 'title'
-      }, vdom(component, state));
+        tag: 'div',
+        attrs: {
+          a: 1
+        }
+      }, vdom(component));
+    });
+
+    it('should handle children', function () {
+      var component = React.DOM.div({a: 1}, 'child1', 'child2');
+      eq({
+        tag: 'div',
+        attrs: {
+          a: 1
+        },
+        children: ['child1', 'child2']
+      }, vdom(component));
+    });
+
+    it('should handle just', function () {
+      var component = React.DOM.div(null, 'child1');
+      eq({
+        tag: 'div',
+        children: 'child1'
+      }, vdom(component));
+    });
+
+    it('should handle nested tags', function () {
+      var component = React.DOM.div(null, React.DOM.a());
+      eq({
+        tag: 'div',
+        children: {
+          tag: 'a'
+        }
+      }, vdom(component));
     });
 
   });
 
-  describe('React.Component', function () {
+  describe('ReactClassComponent', function () {
 
-    it('should return a assertable DOM', function () {
-      function Anchor () {
-        React.Component.apply(this, arguments);
-      }
-      Anchor.prototype.render = function () {
-        return (
-          React.DOM.a({href: this.props.href}, this.props.children)
-        );
-      };
-      var component = new Anchor({href: '#section', children: 'title'});
+    it('should handle a simple ReactClassComponent', function () {
+      var Class = React.createClass({
+        render: function () {
+          return React.DOM.div({a: 1}, 'hello');
+        }
+      });
+      var Component = React.createFactory(Class);
       eq({
-        tag: 'a',
-        attrs: {href: '#section'},
-        children: 'title'
-      }, vdom(component));
+        tag: 'div',
+        attrs: {
+          a: 1
+        },
+        children: 'hello'
+      }, vdom(Component()));
+    });
+
+    it('should handle getInitialState', function () {
+      var Class = React.createClass({
+        getInitialState: function () {
+          return {name: 'Giulio'};
+        },
+        render: function () {
+          return React.DOM.div(null, 'hello ', this.state.name);
+        }
+      });
+      var Component = React.createFactory(Class);
+      eq({
+        tag: 'div',
+        children: ['hello ', 'Giulio']
+      }, vdom(Component()));
     });
 
     it('should handle state argument', function () {
-      function Anchor () {
+      var Class = React.createClass({
+        render: function () {
+          return React.DOM.div(null, 'hello ', this.state.name);
+        }
+      });
+      var Component = React.createFactory(Class);
+      eq({
+        tag: 'div',
+        children: ['hello ', 'Giulio']
+      }, vdom(Component(), {name: 'Giulio'}));
+    });
+
+    it('should handle getDefaultProps', function () {
+      var Class = React.createClass({
+        getDefaultProps: function () {
+          return {name: 'Giulio'};
+        },
+        render: function () {
+          return React.DOM.div(null, 'hello ', this.props.name, this.props.surname);
+        }
+      });
+      var Component = React.createFactory(Class);
+      eq({
+        tag: 'div',
+        children: ['hello ', 'Giulio', 'Canti']
+      }, vdom(Component({surname: 'Canti'})));
+    });
+
+  });
+
+  describe('ReactComponent', function () {
+
+    it('should handle a simple ReactComponent', function () {
+      function Component() {
         React.Component.apply(this, arguments);
       }
-      Anchor.prototype.render = function () {
-        return (
-          React.DOM.a({href: this.state.href}, this.props.children)
-        );
+      util.inherits(Component, React.Component);
+      Component.prototype.render = function() {
+        return React.DOM.div({a: 1}, 'hello');
       };
-      var component = new Anchor({children: 'title'});
-      var state = {href: '#section'};
       eq({
-        tag: 'a',
-        attrs: {href: '#section'},
-        children: 'title'
-      }, vdom(component, state));
+        tag: 'div',
+        attrs: {
+          a: 1
+        },
+        children: 'hello'
+      }, vdom(new Component()));
+    });
+
+    it('should handle getInitialState', function () {
+      function Component() {
+        React.Component.apply(this, arguments);
+        this.state = {name: 'Giulio'};
+      }
+      util.inherits(Component, React.Component);
+      Component.prototype.render = function() {
+        return React.DOM.div(null, this.state.name);
+      };
+      eq({
+        tag: 'div',
+        children: 'Giulio'
+      }, vdom(new Component()));
+    });
+
+    it('should handle state argument', function () {
+      function Component() {
+        React.Component.apply(this, arguments);
+      }
+      util.inherits(Component, React.Component);
+      Component.prototype.render = function() {
+        return React.DOM.div(null, this.state.name);
+      };
+      eq({
+        tag: 'div',
+        children: 'Giulio'
+      }, vdom(new Component(), {name: 'Giulio'}));
+    });
+
+  });
+
+  describe('nested components', function () {
+
+    it('should handle tcomb-form', function () {
+      function Component() {
+        React.Component.apply(this, arguments);
+      }
+      util.inherits(Component, React.Component);
+      Component.prototype.render = function() {
+        return React.createFactory(t.form.Form)({
+          type: t.Str,
+          options: {
+            id: 'myid'
+          }
+        });
+      };
+      eq({
+        "tag": "div",
+        "attrs": {
+          "className": "form-group"
+        },
+        "children": {
+          "tag": "input",
+          "attrs": {
+            "type": "text",
+            "name": "myid",
+            "value": null,
+            "className": "form-control",
+            "id": null,
+            "aria-describedby": null
+          }
+        }
+      }, JSON.parse(JSON.stringify(vdom(new Component()))));
     });
 
   });

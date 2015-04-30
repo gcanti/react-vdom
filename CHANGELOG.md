@@ -10,6 +10,14 @@
 
 **Note**: Gaps between patch versions are faulty/broken releases.
 
+## v0.3
+
+- **Breaking Change**
+  + Drop support for React v0.12
+- **Internal**
+  + Refactoring
+  + Remove tcomb dependency
+
 ## v0.2.4
 
 - **New Feature**
