@@ -27,6 +27,12 @@ function vdomDOM(tag) {
     }
   }
   if (children != null) {
+    if (Array.isArray(children)) {
+      children = compact(flatten(children));
+      if (children.length === 1) {
+        children = children[0];
+      }
+    }
     dom.children = children;
   }
   return dom;
@@ -55,17 +61,24 @@ function vdomReactComponent(reactComponent, state) {
 }
 
 function vdom(x, state) {
-  if (Array.isArray(x)) {
-    x = compact(flatten(x)).map(function (y) {
-      return vdom(y);
-    });
-    return x.length > 1 ? x : x[0];
-  } else if (x instanceof React.Component) {
-    return vdomReactComponent(x, state);
-  } else if (x instanceof ReactElement) {
-    return vdomReactElement(x, state);
+  try {
+    if (Array.isArray(x)) {
+      x = compact(flatten(x)).map(function (y) {
+        return vdom(y);
+      });
+      return x.length > 1 ? x : x[0];
+    } else if (x instanceof React.Component) {
+      return vdomReactComponent(x, state);
+    } else if (x instanceof ReactElement) {
+      return vdomReactElement(x, state);
+    }
+    return x;
+  } catch (e) {
+    return {
+      tag: 'error',
+      children: e.message
+    };
   }
-  return x;
 }
 
 module.exports = vdom;

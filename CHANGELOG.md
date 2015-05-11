@@ -10,6 +10,13 @@
 
 **Note**: Gaps between patch versions are faulty/broken releases.
 
+## v0.4
+
+- **New Feature**
+  + Return a generic tag error when an exception is thrown
+- **Breaking Change**
+  + Compact children for DOM nodes
+
 ## v0.3
 
 - **Breaking Change**
