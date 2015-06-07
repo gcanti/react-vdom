@@ -40,6 +40,17 @@ describe('vdom', function () {
       }, vdom(component));
     });
 
+    it('should handle nully and falsy children', function () {
+      var component = React.DOM.div({a: 1}, null, 'child1', false, null, 'child2');
+      eq({
+        tag: 'div',
+        attrs: {
+          a: 1
+        },
+        children: ['child1', 'child2']
+      }, vdom(component));
+    });
+
     it('should handle just', function () {
       var component = React.DOM.div(null, 'child1');
       eq({
