@@ -5,7 +5,7 @@ var ReactElement = require('react/lib/ReactElement');
 
 function compact(arr) {
   return arr.filter(function (x) {
-    return x != null;
+    return x != null && x != false;
   });
 }
 
