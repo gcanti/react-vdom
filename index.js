@@ -3,9 +3,11 @@
 var React = require('react');
 var ReactElement = require('react/lib/ReactElement');
 
+var falsy = [null, undefined, false];
+
 function compact(arr) {
   return arr.filter(function (x) {
-    return x != null;
+    return falsy.indexOf(x) === -1;
   });
 }
 
@@ -26,7 +28,7 @@ function vdomDOM(tag) {
       }
     }
   }
-  if (children != null) {
+  if (falsy.indexOf(children) === -1) {
     if (Array.isArray(children)) {
       children = compact(flatten(children));
       if (children.length === 1) {
