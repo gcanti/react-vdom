@@ -10,6 +10,11 @@
 
 **Note**: Gaps between patch versions are faulty/broken releases.
 
+## v0.5
+
+- **Breaking Change** (maybe)
+  + treat falsy children same as nully children (thanks @giogonzo)
+
 ## v0.4
 
 - **New Feature**
