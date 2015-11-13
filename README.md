@@ -4,7 +4,7 @@
 
 # Important
 
-If you are using React v0.13 you want to install react-vdom v0.5.
+If you are using React v0.13 you may want to install react-vdom v0.5.
 
 # The Idea
 
@@ -12,11 +12,13 @@ I wrote this handy little library for testing purposes: you can extract the vdom
 component and test it against a JSON with simple tools like assert.deepEqual() and without a real DOM.
 The extracted vdom has the following type definition:
 
-    type Node = {
-      tag: string,
-      attrs: object<name, value>,
-      children: undefined | null | Node | Array<Node>
-    }
+```js
+type Node = {
+  tag: string,
+  attrs: object<name, value>,
+  children: undefined | null | Node | Array<Node>
+}
+```
 
 If your component handle a private state, you can inject a state to test different configurations.
 
@@ -72,7 +74,9 @@ outputs
 
 # Setup
 
-    npm install react-vdom
+```sh
+npm install react-vdom
+```
 
 # Api
 
