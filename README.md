@@ -1,3 +1,7 @@
+[![build status](https://img.shields.io/travis/gcanti/react-vdom/master.svg?style=flat-square)](https://travis-ci.org/gcanti/react-vdom)
+[![dependency status](https://img.shields.io/david/gcanti/react-vdom.svg?style=flat-square)](https://david-dm.org/gcanti/react-vdom)
+![npm downloads](https://img.shields.io/npm/dm/react-vdom.svg)
+
 # The Idea
 
 I wrote this handy little library for testing purposes: you can extract the vdom from a React
@@ -11,10 +15,6 @@ The extracted vdom has the following type definition:
     }
 
 If your component handle a private state, you can inject a state to test different configurations.
-
-This is an example of massive use in a form generation library:
-
-https://github.com/gcanti/tcomb-form/blob/master/test/test.js
 
 # Basic example
 
