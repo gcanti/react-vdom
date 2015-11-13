@@ -39,8 +39,7 @@ var Counter = React.createClass({
   }
 });
 
-var component = Counter();
-var json = vdom(component);
+var json = vdom(<Counter />);
 console.log(json);
 ```
 
@@ -58,8 +57,7 @@ outputs
 
 ```js
 var state = {count: 1};
-var component = Counter();
-console.log(vdom(component, state));
+console.log(vdom(<Counter />, state));
 ```
 
 outputs
