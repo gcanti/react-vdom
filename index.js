@@ -1,8 +1,3 @@
-'use strict';
-
-var React = require('react');
-var ReactElement = require('react/lib/ReactElement');
-
 var falsy = [null, undefined, false];
 
 function compact(arr) {
@@ -15,8 +10,8 @@ function flatten(arr) {
   return [].concat.apply([], arr);
 }
 
-function vdomDOM(tag) {
-  var dom = {tag: tag.type};
+function getDOM(tag) {
+  var dom = { tag: tag.type };
   var children;
   for (var prop in tag.props) {
     if (tag.props.hasOwnProperty(prop)) {
@@ -40,26 +35,15 @@ function vdomDOM(tag) {
   return dom;
 }
 
-function vdomReactClassComponent(Class, state) {
-  var instance = new Class.type(Class.props);
-  if (typeof state !== 'undefined') { instance.state = state; }
-  return vdom(instance.render());
-}
-
-function vdomReactElement(reactElement, state) {
-  return typeof reactElement.type === 'string' ?
-    vdomDOM(reactElement) :
-    vdomReactClassComponent(reactElement, state);
-}
-
-function vdomReactComponent(reactComponent, state) {
-  if (typeof reactComponent.render !== 'function') {
-    throw new Error('[react-vdom] component ' + reactComponent.constructor.name + ': missing render() method');
+function getComponent(component, state) {
+  var instance = new component.type(component.props);
+  if (typeof instance.render === 'function') {
+    if (typeof state !== 'undefined') {
+      instance.state = state;
+    }
+    return vdom(instance.render());
   }
-  if (typeof state !== 'undefined') {
-    reactComponent.state = state;
-  }
-  return vdom(reactComponent.render());
+  return vdom(instance);
 }
 
 function vdom(x, state) {
@@ -69,13 +53,16 @@ function vdom(x, state) {
         return vdom(y);
       });
       return x.length > 1 ? x : x[0];
-    } else if (x instanceof React.Component) {
-      return vdomReactComponent(x, state);
-    } else if (x instanceof ReactElement) {
-      return vdomReactElement(x, state);
+    }
+    if (typeof x.type === 'string') {
+      return getDOM(x);
+    }
+    if (typeof x.$$typeof === 'symbol') {
+      return getComponent(x, state);
     }
     return x;
   } catch (e) {
+    console.error('[react-vdom]', e); // eslint-disable-line
     return {
       tag: 'error',
       children: e.message

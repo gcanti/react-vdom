@@ -10,6 +10,11 @@
 
 **Note**: Gaps between patch versions are faulty/broken releases.
 
+## v0.6
+
+- **Breaking Change**
+  + support React v0.14, fix #7
+
 ## v0.5
 
 - **Breaking Change** (maybe)
