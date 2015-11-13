@@ -2,6 +2,10 @@
 [![dependency status](https://img.shields.io/david/gcanti/react-vdom.svg?style=flat-square)](https://david-dm.org/gcanti/react-vdom)
 ![npm downloads](https://img.shields.io/npm/dm/react-vdom.svg)
 
+# Important
+
+If you are using React v0.13 you want to install react-vdom v0.5.
+
 # The Idea
 
 I wrote this handy little library for testing purposes: you can extract the vdom from a React
