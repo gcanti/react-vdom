@@ -58,7 +58,7 @@ function vdom(x, state) {
       if (typeof x.type === 'string') {
         return getDOM(x);
       }
-      if (typeof x.$$typeof === 'symbol') {
+      if (x.hasOwnProperty('$$typeof')) {
         return getComponent(x, state);
       }
     }
