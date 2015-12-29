@@ -10,6 +10,11 @@
 
 **Note**: Gaps between patch versions are faulty/broken releases.
 
+## v0.6.2
+
+- **Bug Fix**
+  + handle weird travis error
+
 ## v0.6.1
 
 - **New Feature**
