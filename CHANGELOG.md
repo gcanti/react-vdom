@@ -10,6 +10,13 @@
 
 **Note**: Gaps between patch versions are faulty/broken releases.
 
+## v0.6.1
+
+- **New Feature**
+  + add error stack trace
+- **Bug Fix**
+  + handle falsy child
+
 ## v0.6
 
 - **Breaking Change**
