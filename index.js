@@ -65,7 +65,7 @@ function vdom(x, state) {
     console.error('[react-vdom]', e); // eslint-disable-line
     return {
       tag: 'error',
-      children: e.message
+      children: e.message + ', stack: ' + e.stack
     };
   }
 }
