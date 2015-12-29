@@ -54,11 +54,13 @@ function vdom(x, state) {
       });
       return x.length > 1 ? x : x[0];
     }
-    if (typeof x.type === 'string') {
-      return getDOM(x);
-    }
-    if (typeof x.$$typeof === 'symbol') {
-      return getComponent(x, state);
+    if (falsy.indexOf(x) === -1) {
+      if (typeof x.type === 'string') {
+        return getDOM(x);
+      }
+      if (typeof x.$$typeof === 'symbol') {
+        return getComponent(x, state);
+      }
     }
     return x;
   } catch (e) {

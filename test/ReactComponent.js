@@ -22,6 +22,20 @@ describe('ReactComponent', (tape) => {
     assert.deepEqual(expected, actual);
   });
 
+  tape.test('should handle a null child', (assert) => {
+    assert.plan(1);
+    const expected = {
+      tag: 'div'
+    };
+    class Component extends React.Component {
+      render() {
+        return <div>{this.props.children}</div>
+      }
+    }
+    const actual = vdom(<Component>{null}</Component>);
+    assert.deepEqual(expected, actual);
+  });
+
   tape.test('should handle the state', (assert) => {
     assert.plan(1);
     const expected = {
