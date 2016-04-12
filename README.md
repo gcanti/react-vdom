@@ -2,9 +2,10 @@
 [![dependency status](https://img.shields.io/david/gcanti/react-vdom.svg?style=flat-square)](https://david-dm.org/gcanti/react-vdom)
 ![npm downloads](https://img.shields.io/npm/dm/react-vdom.svg)
 
-# Important
+# Compatibility
 
-If you are using React v0.13 you may want to install react-vdom v0.5.
+- React: `^0.13.0` -> react-vdom v0.5
+- React: `^0.14.0`, `^15.0.0` -> react-vdom v0.6
 
 # The Idea
 
